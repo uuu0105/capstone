@@ -1,5 +1,10 @@
 package kr.ac.hansung.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,11 +15,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
+
+@Entity
+@Table(name="seoulrecyclingfacilities")
 public class Facility {
-	int no;
+		
+	@Column(name="cmpnm")
 	String name;
-	String address;
+	
+	@Column(name="detail_adres_cn")
 	String detail_adres;
-	String tel;
+	
+	@Column(name="site_url")
 	String url;	
+	
+	@Column(name="area_se")
+	String address;
+	
+	@Column(name="cttpc_cn")
+	String tel;
+	
+	@Id
+	@Column(name="sn")
+	int no;
 }
