@@ -14,7 +14,13 @@ public class FacilityService {
 	@Autowired
 	private FacilityDao facilityDao;
 	
+	public List<String> getCities(){
+		return facilityDao.getCities();
+	}
 	public List<Facility> getCurrent(){
 		return facilityDao.getFacilities();
+	}
+	public List<Facility> getFacilitiesIn(String location) {
+		return facilityDao.getFacilitiesIn(location);
 	}
 }

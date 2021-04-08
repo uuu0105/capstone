@@ -1,0 +1,72 @@
+
+ul.nav li.dropdown:hover > ul.dropdown-menu{display:block; margin:0;}
+
+@FONT-FACE{
+    font-family: 'bazzi';
+    src:url("src/Bazzi.ttf");
+    font-family: 'BlackHanSans';
+    src:url("src/BlackHanSans.ttf");
+}
+@import url(//font.googleeapis.com/earlyaccess/nanumgothic.css);
+
+
+.container{
+  height:100%;
+}
+/* top nav-item menu */
+
+.nav-item{
+    font-family: "Bazzi";
+    font-size:22px;
+
+}
+.navbar{
+    margin-bottom: 3rem;
+    font-family: "bazzi";
+
+}
+
+ 
+/* 컨테이너 마케팅 탭 */
+.main-border{
+ margin-top:120px;
+ align-items:center;
+ border: 3px solid   #795c10;
+ border-radius: 5px;
+ padding-left:0px;
+ padding-right:0px;
+ 
+
+}
+.main-border > .search{
+  
+  display:flex;
+  padding:5px;
+  border-bottom: 3px solid #795c10;
+}
+
+i{
+  color:red;
+  margin-right:7px;
+  margin-left:5px;
+}
+
+thead{
+  background-color: #aaf5a0;
+  text-align:center;
+  font-size:24px;
+}
+
+td{
+  border-bottom:3px solid #795c10;
+}
+thead{
+  border-bottom:3px solid #795c10;
+}
+.center_border{
+  border-right:3px solid #795c10;
+}
+.controller{
+  font-size:16px;
+
+}

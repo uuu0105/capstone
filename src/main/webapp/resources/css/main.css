@@ -1,0 +1,92 @@
+
+/* main page */
+
+/*최소사이즈*/
+@media all and (max-width:575px)
+{ 
+
+    .Logo{
+      padding-top: 50px;
+    }
+    .card-group div{
+      padding-left :10px;
+      padding-right:10px;
+      padding-top:10px;
+      padding-bottom:10px;
+    }
+    .card{
+      border-radius:2em;
+      border-width:5px;
+      border-color:#795c10;
+      align-items:center;
+      background-color:#e8e8e8;
+      margin-top:5px;
+      margin-bottom:5px;
+    }  
+    .card-img-top{
+      width:80px;
+      height:80px;
+    }
+}
+/*중앙사이즈*/
+@media all and (min-width:576px)and (max-width:1010px) 
+{ 
+    .background{
+      background:url("pictures/Background2.png");
+      background-repeat: no-repeat;
+      background-size:cover;
+      height:100vh;
+    }
+  .Logo{
+      padding-top: 50px;
+  }
+  .card-group div{
+    padding-left :10px;
+    padding-right:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+  .card{
+    border-radius:2em;
+    border-width:5px;
+    border-color:#795c10;
+    align-items:center;
+    background-color:#e8e8e8;
+    margin-top:10px;
+    margin-bottom:10px;
+  } 
+}
+/*최댇사이즈*/
+  @media all and (min-width:1011px)
+  {
+      .background{
+        background:url("pictures/backimg.png");
+        background-repeat: no-repeat;
+        background-size:cover;
+        height:100vh;
+      }
+      .Logo{
+        padding-top: 50px;
+      }
+      .card-group div{
+        padding-left :10px;
+        padding-right:10px;
+        padding-top:10px;
+        padding-bottom:10px;
+      }
+      .card{
+        border-radius:2em;
+        border-width:5px;
+        border-color:#795c10;
+        align-items:center;
+        background-color:#e8e8e8;
+        margin-top:10px;
+        margin-bottom:10px;
+     
+      }
+      .card-img-top{
+      width:80px;
+      height:80px;
+      }
+}
+

@@ -4,14 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,16 +22,46 @@ public class FacilityDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+//	public int getRows() {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql="from F"
+//
+//	}
+	public List<String> getCities(){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from SeoulCity";
+				
+		Query<String> query = session.createQuery(hql);	
+		List<String> cityList = query.getResultList();
+		
+		return cityList;
+	}
 	public List<Facility> getFacilities(){
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from Facility";
+		String hql = "from Facility facility order by facility.name asc";
 		
 		Query<Facility> query = session.createQuery(hql, Facility.class);
+		query.setFirstResult(0);
+		query.setMaxResults(10);
+		
     	List<Facility> facilityList = query.getResultList();
     	
     	return facilityList;
 	}
     //private JdbcTemplate jdbcTemplate;
+	public List<Facility> getFacilitiesIn(String location) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from Facility facility where facility.name like '%" + location + "%'";
+		
+		Query<Facility> query = session.createQuery(hql, Facility.class);
+		query.setFirstResult(0);
+		query.setMaxResults(10);
+		
+    	List<Facility> facilityList = query.getResultList();
+    	
+    	return facilityList;
+	}
 
 //    @Autowired
 //    public void setDataSource(DataSource dataSource) {
