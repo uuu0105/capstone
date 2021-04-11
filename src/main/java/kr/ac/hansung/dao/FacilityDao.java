@@ -1,7 +1,5 @@
 package kr.ac.hansung.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -22,11 +20,7 @@ public class FacilityDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-//	public int getRows() {
-//		Session session = sessionFactory.getCurrentSession();
-//		String hql="from F"
-//
-//	}
+	// Dropdown Data : number of Seoul cities
 	public List<String> getCities(){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from SeoulCity";
@@ -36,31 +30,70 @@ public class FacilityDao {
 		
 		return cityList;
 	}
-	public List<Facility> getFacilities(){
+	
+	// return Data By page&size : pagination!!
+	public List<Facility> getFacilities(int page, int size){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from Facility facility order by facility.name asc";
 		
 		Query<Facility> query = session.createQuery(hql, Facility.class);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
+		query.setFirstResult((page-1)*size);
+		query.setMaxResults(size);
 		
     	List<Facility> facilityList = query.getResultList();
     	
     	return facilityList;
 	}
-    //private JdbcTemplate jdbcTemplate;
-	public List<Facility> getFacilitiesIn(String location) {
+	
+    // return User's requesting Data 
+//	public List<Facility> getFacilitiesIn(String location) {
+//		
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from Facility facility where facility.name like '%" + location + "%'";
+//		
+//		Query<Facility> query = session.createQuery(hql, Facility.class);
+//		query.setFirstResult(0);
+//		query.setMaxResults(10);
+//		
+//    	List<Facility> facilityList = query.getResultList();
+//    	
+//    	return facilityList;
+//	}
+	
+	// Count total_facilities_num
+	public int getAllNum() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select count(*) from Facility";		 
+		Query query = session.createQuery(hql);
 		
+		List listResult = query.list();
+		Number number = (Number) listResult.get(0);
+		return number.intValue();
+		
+	}
+	
+	// return User's requesting Data + pagination
+	public List<Facility> getReqFacilities(String location, int page, int size) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from Facility facility where facility.name like '%" + location + "%'";
 		
 		Query<Facility> query = session.createQuery(hql, Facility.class);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
+		query.setFirstResult((page-1)*size);
+		query.setMaxResults(size);
 		
     	List<Facility> facilityList = query.getResultList();
     	
     	return facilityList;
+	}
+
+	public int getReqNum(String location) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select count(name) from Facility facility where facility.name like '%" + location + "%'";		 
+		Query query = session.createQuery(hql);
+		
+		List listResult = query.list();
+		Number number = (Number) listResult.get(0);
+		return number.intValue();
 	}
 
 //    @Autowired

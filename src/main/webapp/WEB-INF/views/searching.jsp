@@ -22,7 +22,7 @@
        <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+	
   </head>
   <body>
     
@@ -94,8 +94,8 @@
             
             <!-- 지역이름, 지역별 전화번호-->
             <tbody>
-            	<c:if test="${f_totalNum == 0 || f_totalNum == null}">
-                	<c:out value="데이터가 없습니다"/>
+            	<c:if test="${req_totalNum == 0 || req_totalNum == null}">
+                	<c:out value="데이터가 없습니다~"/>
                 </c:if>
                 
 	            <c:forEach var="facility" items="${facilities}">
@@ -112,22 +112,21 @@
                 <span>&#60</span>
                 
                 <!-- 데이터가 한 페이지인 경우 -->
-                <c:if test="${f_totalNum / 10 eq 0}">
-					<a href="${pageContext.request.contextPath}/facilities?page=1&size=10" style="color:black">
+                <c:if test="${req_totalNum / 10 eq 0}">
+					<a href="${pageContext.request.contextPath}/searching?location=${location}page=1&size=10" style="color:black">
 						<span>1</span>
 					</a>
                 </c:if>
                 
                 <!-- 데이터가 한페이지 넘는 경우 -->
-                <c:if test="${f_totalNum != null && f_totalNum / 10 != 0}">
-	                <c:forEach var="page" begin="1" end="${(f_totalNum mod 10) eq 0  ? f_totalNum/10 : f_totalNum/10+(1-((f_totalNum/10)%1))%1 }">
-						<a href="${pageContext.request.contextPath}/facilities?page=${page}&size=10"
-																	style="color:black">
-							<span>${page}</span>
-						</a>
-					</c:forEach>
+                <c:if test="${req_totalNum != null && req_totalNum/10 != 0}">
+				<c:forEach var="r_page" begin="1" end="${(req_totalNum/10) eq 0 ? req_totalNum/10 : req_totalNum/10+(1-((req_totalNum/10)%1))%1 }">
+					<a href="${pageContext.request.contextPath}/searching?location=${location}page=${r_page}&size=10"
+																style="color:black">
+						<span>${r_page}</span>
+					</a>
+				</c:forEach>
 				</c:if>
-				
                 <span>&#62</span>
             </div>
             </form>
