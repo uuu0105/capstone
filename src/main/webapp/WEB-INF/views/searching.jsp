@@ -34,7 +34,7 @@
         <nav class="navbar navbar-expand-fluid navbar-light fixed-top bg-light">
             
             <!--좌측상단 아이콘과, 아이콘의 크기-->
-            <a href="home"><img src= "${pageContext.request.contextPath}/resources/images/We'Re Cycle.png" style="height:80px;"></a>
+            <a href="${pageContext.request.contextPath}"><img src= "${pageContext.request.contextPath}/resources/images/We'Re Cycle.png" style="height:80px;"></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

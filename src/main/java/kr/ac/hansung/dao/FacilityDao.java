@@ -32,19 +32,31 @@ public class FacilityDao {
 	}
 	
 	// return Data By page&size : pagination!!
-	public List<Facility> getFacilities(int page, int size){
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from Facility facility order by facility.name asc";
-		
-		Query<Facility> query = session.createQuery(hql, Facility.class);
-		query.setFirstResult((page-1)*size);
-		query.setMaxResults(size);
-		
-    	List<Facility> facilityList = query.getResultList();
-    	
-    	return facilityList;
-	}
+//	public List<Facility> getFacilities(int page, int size){
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from Facility facility order by facility.name asc";
+//		
+//		Query<Facility> query = session.createQuery(hql, Facility.class);
+//		query.setFirstResult((page-1)*size);
+//		query.setMaxResults(size);
+//		
+//    	List<Facility> facilityList = query.getResultList();
+//    	
+//    	return facilityList;
+//	}
 	
+	public List<Facility> getFacilities(){
+	Session session = sessionFactory.getCurrentSession();
+	String hql = "from Facility facility order by facility.name asc";
+	
+	Query<Facility> query = session.createQuery(hql, Facility.class);
+	//query.setFirstResult((page-1)*size);
+	//query.setMaxResults(size);
+	
+	List<Facility> facilityList = query.getResultList();
+	
+	return facilityList;
+}	
     // return User's requesting Data 
 //	public List<Facility> getFacilitiesIn(String location) {
 //		
@@ -73,18 +85,35 @@ public class FacilityDao {
 	}
 	
 	// return User's requesting Data + pagination
-	public List<Facility> getReqFacilities(String location, int page, int size) {
+//	public List<Facility> getReqFacilities(String location, int page, int size) {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from Facility facility where facility.name like '%" + location + "%'";
+//		
+//		Query<Facility> query = session.createQuery(hql, Facility.class);
+//		query.setFirstResult((page-1)*size);
+//		query.setMaxResults(size);
+//		
+//    	List<Facility> facilityList = query.getResultList();
+//    	
+//    	return facilityList;
+//	}
+	
+	public List<Facility> getReqFacilities(String location) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from Facility facility where facility.name like '%" + location + "%'";
-		
+		//String hql = "from Facility facility where facility.address like '%" + location + "%'";
+		//String hql = "from Facility facility where facility.address="+location;
+		String hql = "from Facility facility where facility.address= :location";
 		Query<Facility> query = session.createQuery(hql, Facility.class);
-		query.setFirstResult((page-1)*size);
-		query.setMaxResults(size);
+		query.setParameter("location", location);
+		//query.setFirstResult((page-1)*size);
+		//query.setMaxResults(size);
 		
     	List<Facility> facilityList = query.getResultList();
     	
+    	//List<Facility> facilityList = (List<Facility>) session.get(Facility.class, location);
     	return facilityList;
 	}
+	
 
 	public int getReqNum(String location) {
 		Session session = sessionFactory.getCurrentSession();

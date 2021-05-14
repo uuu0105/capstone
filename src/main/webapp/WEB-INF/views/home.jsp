@@ -22,7 +22,18 @@
        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-   
+   <script>
+   		function cameraclick(){
+   			var userConfirmed = confirm("이 모드는 카메라 동작을 요합니다. 카메라 동작을 허용하시겠습니까?");
+   			
+   			if( userConfirmed == true){
+   				location.href='${pageContext.request.contextPath}/usecamera';
+   			}else {
+   				alert("카메라 촬영을 허용해야 이 기능을 이용할 수 있습니다.");
+   			}
+   			
+   		}
+   </script>
   </head>
 <body onload="time()">
     <script>
@@ -40,7 +51,8 @@
             <div class="container">
                 <div class="card-group menu">
                     <div class="card">
-                        <img src="${pageContext.request.contextPath}/resources/images/camera.png" alt="Card image" style="max-width:100%; height:auto;" >                               
+                        <img src="${pageContext.request.contextPath}/resources/images/camera.png" alt="Card image" style="max-width:100%; height:auto;" 
+                        	onclick="cameraclick()">                               
                     </div>
                     <div class="card">
                         <img src="${pageContext.request.contextPath}/resources/images/upload.png" alt="Card image"style="max-width:100%; height:auto;" >                         
