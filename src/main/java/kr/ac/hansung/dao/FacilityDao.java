@@ -2,6 +2,7 @@ package kr.ac.hansung.dao;
 
 import java.util.List;
 
+import org.hibernate.Cache;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hansung.model.Facility;
+import kr.ac.hansung.model.FacilityDetail;
+import kr.ac.hansung.model.SeoulCity;
 
 
 //@Component("facilityDao")
@@ -20,16 +23,16 @@ public class FacilityDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	// Dropdown Data : number of Seoul cities
-	public List<String> getCities(){
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from SeoulCity";
-				
-		Query<String> query = session.createQuery(hql);	
-		List<String> cityList = query.getResultList();
-		
-		return cityList;
-	}
+//	// Dropdown Data : number of Seoul cities
+//		public List<String> getCities(){
+//			Session session = sessionFactory.getCurrentSession();
+//			String hql = "from SeoulCity";
+//					
+//			Query<String> query = session.createQuery(hql);	
+//			List<String> cityList = query.getResultList();
+//			
+//			return cityList;
+//		}
 	
 	// return Data By page&size : pagination!!
 //	public List<Facility> getFacilities(int page, int size){
@@ -45,13 +48,14 @@ public class FacilityDao {
 //    	return facilityList;
 //	}
 	
-	public List<Facility> getFacilities(){
+	public List<Facility> getFacilities(int page, int size){
 	Session session = sessionFactory.getCurrentSession();
+	
 	String hql = "from Facility facility order by facility.name asc";
 	
 	Query<Facility> query = session.createQuery(hql, Facility.class);
-	//query.setFirstResult((page-1)*size);
-	//query.setMaxResults(size);
+	query.setFirstResult((page-1)*size);
+	query.setMaxResults(size);
 	
 	List<Facility> facilityList = query.getResultList();
 	
@@ -102,9 +106,11 @@ public class FacilityDao {
 		Session session = sessionFactory.getCurrentSession();
 		//String hql = "from Facility facility where facility.address like '%" + location + "%'";
 		//String hql = "from Facility facility where facility.address="+location;
-		String hql = "from Facility facility where facility.address= :location";
+		String hql = "from Facility facility where facility.district=:location";
 		Query<Facility> query = session.createQuery(hql, Facility.class);
 		query.setParameter("location", location);
+		
+		
 		//query.setFirstResult((page-1)*size);
 		//query.setMaxResults(size);
 		
@@ -114,7 +120,14 @@ public class FacilityDao {
     	return facilityList;
 	}
 	
-
+	//Get Detail Data of Clicked Location
+	public FacilityDetail getFacilityDetailOf(String location) {
+		Session session = sessionFactory.getCurrentSession();
+		FacilityDetail facilityDetail = (FacilityDetail) session.get(FacilityDetail.class, location);
+		
+		return facilityDetail;
+	}
+	
 	public int getReqNum(String location) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "select count(name) from Facility facility where facility.name like '%" + location + "%'";		 
@@ -124,6 +137,14 @@ public class FacilityDao {
 		Number number = (Number) listResult.get(0);
 		return number.intValue();
 	}
+
+
+
+	
+
+	
+
+
 
 //    @Autowired
 //    public void setDataSource(DataSource dataSource) {
